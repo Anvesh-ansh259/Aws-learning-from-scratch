@@ -100,7 +100,7 @@ To enable Instance 2 with a static IP to communicate with Instance 1 in a privat
 
 
 
-Instance 2 can communicate with Instance 1 by sending traffic to the multi-AZ load balancer that fronts Instance 1. The load balancer handles routing requests to Instance 1 across private subnets and AZs. I would configure security groups so that the load balancer allows traffic from Instance 2’s static IP, and Instance 1 only accepts traffic from the load balancer’s security group. If Instance 2 is outside the VPC, I would use VPC Peering, VPN, or Direct Connect to enable network connectivity.
+You can use VPC Endpoints (PrivateLink) — specifically, S3 Gateway Endpoint for package repositories and SSM VPC Endpoints to manage and install updates privately, without needing a NAT Gateway or bastion host.
 
 
 
@@ -177,6 +177,7 @@ Yes, we can increase the root volume of an EC2 instance without shutting it down
 | \*\*CloudWatch Metrics\*\*       | 1-min metrics: 15 days, 1-hr metrics: 455 days | Fixed                                         | CloudWatch metrics are stored at different granularities: \\n- \*\*1-minute metrics\*\* are available for \*\*15 days\*\*\\n- \*\*1-hour aggregated metrics\*\* are kept for \*\*455 days\*\*\\nThese retention periods are \*\*fixed and cannot be changed\*\*. |
 
 | \*\*CloudWatch Logs\*\*          | Never by default                               | Configurable per log group (1 day → 10 years) | CloudWatch Logs \*\*does not delete logs automatically\*\* by default. You must set a \*\*retention policy per log group\*\* to automatically delete old logs. Options range from \*\*1 day up to 10 years\*\*.                                       |
+
 
 
 
